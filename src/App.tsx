@@ -23,8 +23,10 @@ function App() {
             }
 
             const results = await planItinerary(from, to);
-            console.log(results);
             setItineraries(results);
+        } catch (e) {
+            console.error(e);
+            alert('Could not plan itinerary. See console for details.');
         } finally {
             setLoading(false);
         }
@@ -65,4 +67,4 @@ function App() {
 }
 
 
-export default App
+export default App;

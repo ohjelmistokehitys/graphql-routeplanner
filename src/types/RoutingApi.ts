@@ -28,10 +28,10 @@ export type Plan = {
  */
 export type Itinerary = {
     /** "Time when the user leaves from the origin. Format: Unix timestamp in milliseconds." */
-    startTime: number;
+    start: number;
 
     /** "Time when the user arrives to the destination.. Format: Unix timestamp in milliseconds." */
-    endTime: number;
+    end: number;
 
     /** "How much time is spent walking, in seconds." */
     walkTime: number;
@@ -57,10 +57,10 @@ export type Leg = {
     to: Place;
 
     /** "The date and time when this leg begins. Format: Unix timestamp in milliseconds." */
-    startTime: number;
+    start: number;
 
     /** "The date and time when this leg ends. Format: Unix timestamp in milliseconds." */
-    endTime: number;
+    end: number;
 
     /** "Transport mode of this route, e.g. BUS" */
     mode: Mode;

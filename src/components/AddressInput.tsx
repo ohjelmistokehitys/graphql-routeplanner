@@ -22,6 +22,9 @@ export function AddressInput({ callback, label }: AddressInputProps) {
 
             const result = await addressSearch(text);
             setSearchResult(result);
+        } catch (e) {
+            console.error(e);
+            alert('Could not search address. See console for details.');
         } finally {
             setLoading(false);
         }
