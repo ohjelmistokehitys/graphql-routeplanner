@@ -1,0 +1,2 @@
+# all text files should have consistent LF line endings
+* text=auto eol=lf
