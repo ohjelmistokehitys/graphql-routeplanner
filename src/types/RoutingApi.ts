@@ -27,11 +27,11 @@ export type Plan = {
  * https://digitransit.fi/en/developers/apis/1-routing-api/itinerary-planning/
  */
 export type Itinerary = {
-    /** "Time when the user leaves from the origin. Format: Unix timestamp in milliseconds." */
-    start: number;
+    /** "Time when the user leaves from the origin in ISO format" */
+    start: string;
 
-    /** "Time when the user arrives to the destination.. Format: Unix timestamp in milliseconds." */
-    end: number;
+    /** "Time when the user arrives to the destination in ISO format" */
+    end: string;
 
     /** "How much time is spent walking, in seconds." */
     walkTime: number;
@@ -57,10 +57,10 @@ export type Leg = {
     to: Place;
 
     /** "The date and time when this leg begins. Format: Unix timestamp in milliseconds." */
-    start: number;
+    startTime: number;
 
     /** "The date and time when this leg ends. Format: Unix timestamp in milliseconds." */
-    end: number;
+    endTime: number;
 
     /** "Transport mode of this route, e.g. BUS" */
     mode: Mode;

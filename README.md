@@ -1,8 +1,8 @@
 # TypeScript, REST ja GraphQL -reittiopas
 
-Tämä harjoitus yhdistää REST API:iden ja GraphQL-rajapintojen käytön TypeScript-kielellä. Projektissa rakennetaan hyvin yksinkertaistettu versio [reittioppaasta](https://www.reittiopas.fi), joka hyödyntää Digitransitin paikkatietoja sekä reitityspalveluja.
+Tämä harjoitus yhdistää REST-apien ja GraphQL-rajapintojen käytön TypeScript-kielellä. Projektissa rakennetaan hyvin yksinkertaistettu versio [reittioppaasta](https://www.reittiopas.fi), joka hyödyntää Digitransitin paikkatietoja sekä reitityspalveluja.
 
-Harjoitus on toteutettu React + Vite -sovelluksena, mutta keskitymme HTTP-rajapintojen hyödyntämiseen, asynkroniseen ohjelmointiin ja GraphQL-kyselyiden tekemiseen. Harjoituksessa ei tarvitse perehtyä Reactiin tai tehdä muutoksia komponentteihin.
+Harjoitus on toteutettu [React + Vite -sovelluksena](https://vite.dev/), mutta keskitymme HTTP-rajapintojen hyödyntämiseen, asynkroniseen ohjelmointiin ja GraphQL-kyselyiden tekemiseen. Harjoituksessa ei tarvitse perehtyä Reactiin tai tehdä muutoksia komponentteihin.
 
 
 ## Mikä on GraphQL?
@@ -16,6 +16,18 @@ GraphQL-rajapintoihin tutustumiseksi suosittelemme seuraavia kahta videota:
 Lisäksi suosittelemme lukemaan Digitransitin [GraphQL](https://digitransit.fi/en/developers/apis/1-routing-api/0-graphql)- sekä [GraphiQL](https://digitransit.fi/en/developers/apis/1-routing-api/1-graphiql/)-sivut.
 
 
+## Mikä on digitransit?
+
+> *"Digitransit Platform is an open source journey planning solution that combines several open source components into a modern, highly available route planning service. Route planning algorithms and APIs are provided by Open Trip Planner (OTP). OTP is a great solution for general route planning but in order to provide top-notch journey planning other components such as Mobile friendly user interface, Map tile serving, Geocoding, and various data conversion tools are needed. Digitransit platform provides these tools."*
+>
+> https://digitransit.fi/en/developers/
+
+Tässä esimerkkiprojektissa käytämme Digitransitin palveluista seuraavia rajapintoja:
+
+* Geocoding API https://digitransit.fi/en/developers/apis/3-geocoding-api/
+* Routing API https://digitransit.fi/en/developers/apis/1-routing-api/
+
+
 ## API-avaimet ja tunnistautuminen 🔐
 
 Digitransit-rajapinnat vaativat tunnistautumista API-avainten avulla. Palveluun rekisteröityminen onnistuu ilmaiseksi osoitteessa https://portal-api.digitransit.fi/. Rekisteröinnin jälkeen voit "tilata" itsellesi "Digitransit developer API"-palvelun "Products"-välilehdellä. Tilauksen jälkeen löydät API-avaimesi "Profile"-välilehdeltä.
@@ -23,30 +35,28 @@ Digitransit-rajapinnat vaativat tunnistautumista API-avainten avulla. Palveluun 
 > [!WARNING]
 > Älä tallenna API-avaintasi suoraan lähdekoodiin äläkä lisää sitä versionhallintaan. Käytä sen sijaan ympäristömuuttujaa.
 
-Määrittele API-avain ympäristömuuttujaksi nimellä `VITE_DIGITRANSIT_SUBSCRIPTION_KEY`. Voit tehdä tämän luomalla `.env`-tiedoston projektin juureen. Löydät esimerkin [`.env.example`-tiedostosta](./.env.example). Lisättyäsi tiedoston tai tehtyäsi siihen muutoksia, käynnistä kehityspalvelin uudelleen.
+Määrittele API-avain ympäristömuuttujaksi nimellä `VITE_DIGITRANSIT_SUBSCRIPTION_KEY`. Voit tehdä tämän esimerkiksi luomalla `.env`-tiedoston projektin juureen. Löydät esimerkin [`.env.example`-tiedostosta](./.env.example). Lisättyäsi tiedoston tai tehtyäsi siihen muutoksia, käynnistä kehityspalvelin uudelleen. Vaihtoehtoisesti voit asettaa muuttujan käyttöjärjestelmääsi tai koodieditoriisi ympäristömuuttujaksi.
 
-Tätä `.env`-tiedostoa **ei tule lisätä versionhallintaan** ja se onkin rajattu pois [.gitignore](./.gitignore)-tiedoston avulla.
+`.env`-tiedostoa **ei tule lisätä versionhallintaan** ja se onkin rajattu pois [.gitignore](./.gitignore)-tiedoston avulla.
 
 
 ## Asennus ja käynnistys
 
-Projekti asennetaan ja käynnistetään kuten mikä tahansa Vite-sovellus:
+Projekti asennetaan ja käynnistetään kehitystilassa kuten mikä tahansa Vite-sovellus:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Siirry osoitteeseen `http://localhost:5173` tai terminaalissa näkyvään porttiin.
-
-Varmista, että olet luonut `.env`-tiedoston ja määritellyt API-avaimesi ennen sovelluksen käynnistämistä.
+Kun sovellus on käynnistynyt, siirry osoitteeseen `http://localhost:5173` tai terminaalissa näkyvään porttiin.
 
 
 ## Proxy-konfiguraatio
 
 Projektissa on proxy-palvelinkonfiguraatio tiedostossa [`vite.config.ts`](./vite.config.ts), joka:
 
-1. **Hoitaa CORS-ongelmat:** Välittää pyynnöt Digitransit API:hin kehityspalvelimen kautta
+1. **Ratkaisee potentiaaliset CORS-ongelmat:** Välittää pyynnöt Digitransit API:hin kehityspalvelimen kautta
 2. **Lisää tunnistautumisen:** Liittää automaattisesti API-avaimen jokaiseen pyyntöön
 3. **Piilottaa API-avaimen:** API-avain ei näy frontend-koodissa tai selaimessa
 
@@ -84,15 +94,20 @@ src/
 Näistä tiedostoista [`clients`-hakemiston](./src/clients/) funktiot ovat tehtävän kannalta keskeiset, koska niihin toteutetaan REST- ja GraphQL-kutsut.
 
 
-## GraphiQL-testikäyttöliittymä
+## Tehtävän osa 1: [src/clients/geocoding.ts](./src/clients/geocoding.ts)
 
-Suosittelemme hyödyntämään Digitransitin GraphiQL-palvelua kyselyiden testaamiseen:
+Tehtävänäsi on täydentää `src/clients/geocoding.ts`-tiedostossa oleva funktio `addressSearch`. Funktion tulee hyödyntää [Geocoding API:a](https://digitransit.fi/en/developers/apis/3-geocoding-api/) ja palauttaa annetulla hakutekstillä saatu API-rajapinnan vastaus sellaisenaan. Vastaukselle on määritetty valmis TypeScript-tyyppi [AddressSearchResponse](./src/types/GeocodingApi.ts).
 
-> *"It is highly recommended to use GraphiQL when familiarizing yourself with the Routing API."*
+Täydennettyäsi funktion, testaa sen toimivuutta kirjoittamalla reittihaun näkymässä (http://localhost:5173) hakukenttään esimerkiksi "Kamppi" ja painamalla "Search". Osoitteen pitäisi löytyä ja tuloksen tulisi näkyä tekstikentän alapuolella. Mikäli toiminto ei toimi, tarkista mahdolliset virheilmoitukset sekä selaimen että terminaalin konsolista.
 
-Voit kokeilla [esimerkkikyselyä GraphiQL-käyttöliittymässä](https://api.digitransit.fi/graphiql/hsl?query=%257B%250A%2520%2520%2520%2520plan%28%250A%2520%2520%2520%2520%2520%2520%2520%2520from%253A%2520%257B%2520lat%253A%252060.318933%252C%2520lon%253A%252024.968296%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520to%253A%2520%257B%2520lat%253A%252060.149087%252C%2520lon%253A%252024.984228%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520numItineraries%253A%25201%250A%2520%2520%2520%2520%29%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520itineraries%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520start%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520end%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520legs%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520from%2520%257B%2520name%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520to%2520%257B%2520name%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520mode%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520route%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520shortName%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%257D%250A%257D)
 
-### Esimerkkikysely
+## Tehtävän osa 2:
+
+Tämän osan suorittaminen edellyttää, että olet saanut ensimmäisen osan toimimaan. Tarkoituksena on tällä kertaa hyödyntää [Routing API:a](https://digitransit.fi/en/developers/apis/1-routing-api/) GraphQL-kyselyiden avulla.
+
+Tehtävänäsi on täydentää [`src/clients/routing.ts`-tiedostossa](./src/clients/routing.ts) oleva funktio `fetchItineraries`. Funktion tulee hyödyntää Routing API:a ja palauttaa annetulla lähtö- ja määränpään koordinaateilla saatu API-rajapinnan vastaus. Rajapinnan antamalle vastaukselle on määritetty valmis TypeScript-tyyppi [RoutingResponse](./src/types/RoutingApi.ts). Funktiosi tulee poimia tästä vastauksesta reittisuunnitelmat (`data.plan.itineraries`) ja palauttaa ne.
+
+Kyselyssä tulee hyödyntää GraphQL:n `plan`-operaatiota, joka saa parametreinaan lähtö- ja määränpään koordinaatit. Lisäksi voit määritellä, kuinka monta reittivaihtoehtoa haluat saada vastauksena. Alla on esitetty esimerkkikysely, [jota voit kokeilla GraphiQL-käyttöliittymässä](https://api.digitransit.fi/graphiql/hsl?query=%257B%250A%2520%2520%2520%2520plan%28%250A%2520%2520%2520%2520%2520%2520%2520%2520from%253A%2520%257B%2520lat%253A%252060.318933%252C%2520lon%253A%252024.968296%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520to%253A%2520%257B%2520lat%253A%252060.149087%252C%2520lon%253A%252024.984228%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520numItineraries%253A%25201%250A%2520%2520%2520%2520%29%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520itineraries%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520start%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520end%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520legs%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520from%2520%257B%2520name%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520to%2520%257B%2520name%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520mode%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520route%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520shortName%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2520%2520%2520%2520%257D%250A%257D):
 
 ```graphql
 {
@@ -117,6 +132,12 @@ Voit kokeilla [esimerkkikyselyä GraphiQL-käyttöliittymässä](https://api.dig
     }
 }
 ```
+
+Suosittelemme hyödyntämään [Digitransitin GraphiQL-palvelua](https://digitransit.fi/en/developers/apis/1-routing-api/1-graphiql/) kyselyiden suunniteluun ja testaamiseen:
+
+> *"It is highly recommended to use GraphiQL when familiarizing yourself with the Routing API."*
+>
+> https://digitransit.fi/en/developers/apis/1-routing-api/1-graphiql/
 
 
 ## Lisenssit

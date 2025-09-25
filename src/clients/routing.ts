@@ -3,16 +3,6 @@ import type { Itinerary, RoutingResponse } from "../types/RoutingApi";
 
 
 export async function planItinerary(from: GeoJsonFeature, to: GeoJsonFeature, count = 3): Promise<Itinerary[]> {
+    console.log(`Itinerary planning not implemented. Returning empty array.`);
     return [];
-}
-
-/**
- * Formats a GeoJsonFeature coordinate into a string, that is accepted
- * by the digitransit GraphQL API.
- *
- * @param p The GeoJsonFeature to format.
- * @returns The formatted coordinate string.
- */
-function formatCoord(p: GeoJsonFeature) {
-    return `{ lat: ${p.geometry.coordinates[1]}, lon: ${p.geometry.coordinates[0]} }`;
 }

@@ -55,7 +55,8 @@ function App() {
             <article>
                 <h2>Routes</h2>
 
-                {loading ? <p>Loading...</p> : null}
+                {loading ? <progress /> : null}
+
                 {!loading && itineraries.length === 0 ? <p>No routes</p> : null}
 
                 {itineraries.map((itinerary, idx) => (
@@ -63,7 +64,7 @@ function App() {
                 ))}
             </article>
         </main>
-    )
+    );
 }
 
 

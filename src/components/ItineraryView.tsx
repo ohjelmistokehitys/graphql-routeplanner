@@ -1,8 +1,11 @@
 import type { Itinerary, Mode } from "../types/RoutingApi";
 
+type ItineraryViewProps = {
+    itinerary: Itinerary
+}
 
-export function ItineraryView({ itinerary }: { itinerary: Itinerary }) {
-    const duration = (itinerary.end - itinerary.start) / 60 / 1_000;
+export function ItineraryView({ itinerary }: ItineraryViewProps) {
+    const duration = (Date.parse(itinerary.end) - Date.parse(itinerary.start)) / 60 / 1_000;
 
     return <article>
         <div>
