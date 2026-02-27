@@ -41,8 +41,11 @@ export async function planItinerary(from: GeoJsonFeature, to: GeoJsonFeature, co
 
     // this request goes to our local proxy, which adds the authentication headers
     // and forwards the request to the actual digitransit API:
-    const response = await fetch('/routing/v2/hsl/gtfs/v1', {
-        headers: { 'Content-Type': 'application/graphql' },
+    const response = await fetch('https://api.digitransit.fi/routing/v2/hsl/gtfs/v1', {
+        headers: {
+            'Content-Type': 'application/graphql',
+            'digitransit-subscription-key': import.meta.env.VITE_DIGITRANSIT_SUBSCRIPTION_KEY
+        },
         method: 'POST',
         body: query
     });
