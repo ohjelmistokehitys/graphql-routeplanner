@@ -82,12 +82,15 @@ src/
 ├── components/
 │   ├── AddressInput.tsx    # Osoitteen syöttökenttä, joka hakee osoitteen koordinaatit REST API:sta
 │   └── ItineraryView.tsx   # Yksittäisen reittisuunnitelman näyttö
+│
 ├── clients/
 │   ├── geocoding.ts        # operaatiot osoitteiden hakemiseksi osoitteilla tai paikkojen nimillä (REST)
 │   └── routing.ts          # operaatiot reittien hakemiseksi (GraphQL)
+│
 ├── types/
 │   ├── GeocodingApi.ts     # sijaintitietojen tyyppimäärittelyt
 │   └── RoutingApi.ts       # reittien tyyppimäärittelyt
+│
 └── App.tsx                 # päänäkymä
 ```
 
@@ -101,7 +104,7 @@ Tehtävänäsi on täydentää `src/clients/geocoding.ts`-tiedostossa oleva funk
 Täydennettyäsi funktion, testaa sen toimivuutta kirjoittamalla reittihaun näkymässä (http://localhost:5173) hakukenttään esimerkiksi "Kamppi" ja painamalla "Search". Osoitteen pitäisi löytyä ja tuloksen tulisi näkyä tekstikentän alapuolella. Mikäli toiminto ei toimi, tarkista mahdolliset virheilmoitukset sekä selaimen että terminaalin konsolista.
 
 
-## Tehtävän osa 2:
+## Tehtävän osa 2: [src/clients/routing.ts](./src/clients/routing.ts)
 
 Tämän osan suorittaminen edellyttää, että olet saanut ensimmäisen osan toimimaan. Tarkoituksena on tällä kertaa hyödyntää [Routing API:a](https://digitransit.fi/en/developers/apis/1-routing-api/) GraphQL-kyselyiden avulla.
 
@@ -161,6 +164,8 @@ Suosittelemme hyödyntämään [Digitransitin GraphiQL-palvelua](https://digitra
 > *"Digitransit Platform is an open source journey planning solution that combines several open source components into a modern, highly available route planning service. Route planning algorithms and APIs are provided by Open Trip Planner (OTP). OTP is a great solution for general route planning but in order to provide top-notch journey planning other components such as Mobile friendly user interface, Map tile serving, Geocoding, and various data conversion tools are needed. Digitransit platform provides these tools."*
 >
 > https://digitransit.fi/en/developers/
+
+Digitransit makes the data available based on JHS-189 (permission to use the open data) and [Creative Commons name 4.0 (CC BY)](https://creativecommons.org/licenses/by/4.0/) licensing.
 
 ## Tämä tehtävä
 

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import type { GeoJsonFeature } from './types/GeocodingApi';
-import { AddressInput } from './components/AddressInput';
 import { planItinerary } from './clients/routing';
-import type { Itinerary } from './types/RoutingApi';
+import { AddressInput } from './components/AddressInput';
 import { ItineraryView } from './components/ItineraryView';
+import type { GeoJsonFeature } from './types/GeocodingApi';
+import type { Itinerary } from './types/RoutingApi';
 
 function App() {
 
@@ -63,9 +63,18 @@ function App() {
                     <ItineraryView key={idx} itinerary={itinerary} />
                 ))}
             </article>
+            <footer>
+                <License />
+            </footer>
         </main>
     );
 }
 
+function License() {
+    return <em>
+        Digitransit makes the data available based on JHS-189 (permission to use the open data) and <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons name 4.0 (CC BY)</a> licensing.
+        See <a href="https://digitransit.fi/en/developers/apis/7-terms-of-use/">Digitransit terms of use</a> for more details.
+    </em>;
+}
 
 export default App;
