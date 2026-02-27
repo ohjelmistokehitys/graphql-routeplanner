@@ -165,6 +165,8 @@ Suosittelemme hyödyntämään [Digitransitin GraphiQL-palvelua](https://digitra
 >
 > https://digitransit.fi/en/developers/
 
+Digitransit makes the data available based on JHS-189 (permission to use the open data) and [Creative Commons name 4.0 (CC BY)](https://creativecommons.org/licenses/by/4.0/) licensing.
+
 ## Tämä tehtävä
 
 Tämän tehtävän on kehittänyt Teemu Havulinna ja se on lisensoitu [Creative Commons BY-NC-SA -lisenssillä](https://creativecommons.org/licenses/by-nc-sa/4.0/). Tehtävänannon, lähdekoodien ja testien toteutuksessa on hyödynnetty ChatGPT-kielimallia sekä GitHub copilot -tekoälyavustinta.
