@@ -159,7 +159,7 @@ Suosittelemme hyödyntämään [Digitransitin GraphiQL-palvelua](https://digitra
 
 ## Lisenssit
 
-## Digitransit
+### Digitransit
 
 > *"Digitransit Platform is an open source journey planning solution that combines several open source components into a modern, highly available route planning service. Route planning algorithms and APIs are provided by Open Trip Planner (OTP). OTP is a great solution for general route planning but in order to provide top-notch journey planning other components such as Mobile friendly user interface, Map tile serving, Geocoding, and various data conversion tools are needed. Digitransit platform provides these tools."*
 >
@@ -167,6 +167,18 @@ Suosittelemme hyödyntämään [Digitransitin GraphiQL-palvelua](https://digitra
 
 Digitransit makes the data available based on JHS-189 (permission to use the open data) and [Creative Commons name 4.0 (CC BY)](https://creativecommons.org/licenses/by/4.0/) licensing.
 
-## Tämä tehtävä
+### React
+
+React-kirjasto on lisensoitu MIT-lisenssillä: https://github.com/facebook/react/blob/main/LICENSE.
+
+### Vite
+
+Vite-työkalu on lisensoitu MIT-lisenssillä: https://github.com/vitejs/vite/blob/main/LICENSE.
+
+### Pico CSS
+
+[Pico CSS](https://picocss.com/) on lisensoitu MIT-lisenssillä: https://github.com/picocss/pico/blob/master/LICENSE.md.
+
+### Tämä tehtävä
 
 Tämän tehtävän on kehittänyt Teemu Havulinna ja se on lisensoitu [Creative Commons BY-NC-SA -lisenssillä](https://creativecommons.org/licenses/by-nc-sa/4.0/). Tehtävänannon, lähdekoodien ja testien toteutuksessa on hyödynnetty ChatGPT-kielimallia sekä GitHub copilot -tekoälyavustinta.
