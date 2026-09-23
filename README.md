@@ -35,7 +35,7 @@ Digitransit-rajapinnat vaativat tunnistautumista API-avainten avulla. Palveluun 
 > [!WARNING]
 > Älä tallenna API-avaintasi suoraan lähdekoodiin äläkä lisää sitä versionhallintaan. Käytä sen sijaan ympäristömuuttujaa.
 
-Määrittele API-avain ympäristömuuttujaksi nimellä `VITE_DIGITRANSIT_SUBSCRIPTION_KEY`. Voit tehdä tämän esimerkiksi luomalla `.env`-tiedoston projektin juureen. Löydät esimerkin [`.env.example`-tiedostosta](./.env.example). Lisättyäsi tiedoston tai tehtyäsi siihen muutoksia, käynnistä kehityspalvelin uudelleen. Vaihtoehtoisesti voit asettaa muuttujan käyttöjärjestelmääsi tai koodieditoriisi ympäristömuuttujaksi.
+Määrittele API-avain ympäristömuuttujaksi nimellä `DIGITRANSIT_SUBSCRIPTION_KEY`. Voit tehdä tämän esimerkiksi luomalla `.env`-tiedoston projektin juureen. Löydät esimerkin [`.env.example`-tiedostosta](./.env.example). Lisättyäsi tiedoston tai tehtyäsi siihen muutoksia, käynnistä kehityspalvelin uudelleen. Vaihtoehtoisesti voit asettaa muuttujan käyttöjärjestelmääsi tai koodieditoriisi ympäristömuuttujaksi.
 
 `.env`-tiedostoa **ei tule lisätä versionhallintaan** ja se onkin rajattu pois [.gitignore](./.gitignore)-tiedoston avulla.
 

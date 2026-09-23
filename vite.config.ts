@@ -1,6 +1,6 @@
-import { defineConfig, loadEnv, type HttpProxy, type ProxyOptions } from 'vite'
-import react from '@vitejs/plugin-react'
-import type * as http from 'node:http'
+import react from '@vitejs/plugin-react';
+import type * as http from 'node:http';
+import { defineConfig, loadEnv, type HttpProxy, type ProxyOptions } from 'vite';
 
 /**
  * A proxy is needed to make requests to the digitransit API.
@@ -29,11 +29,13 @@ const digitransitProxy = (apiKey: string): ProxyOptions => ({
 });
 
 // See https://vite.dev/config/
-export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, process.cwd());
+export default defineConfig(({ mode }: { mode: string }) => {
+    const env = loadEnv(mode, process.cwd(), '');
 
-    if (!env.VITE_DIGITRANSIT_SUBSCRIPTION_KEY) {
-        throw new Error('Missing VITE_DIGITRANSIT_SUBSCRIPTION_KEY environment variable');
+    const apiKey = env.DIGITRANSIT_SUBSCRIPTION_KEY;
+
+    if (!apiKey) {
+        throw new Error('Missing DIGITRANSIT_SUBSCRIPTION_KEY environment variable');
     }
 
     return {
@@ -41,8 +43,8 @@ export default defineConfig(({ mode }) => {
 
         server: {
             proxy: {
-                '/routing': digitransitProxy(env.VITE_DIGITRANSIT_SUBSCRIPTION_KEY),
-                '/geocoding': digitransitProxy(env.VITE_DIGITRANSIT_SUBSCRIPTION_KEY)
+                '/routing': digitransitProxy(apiKey),
+                '/geocoding': digitransitProxy(apiKey)
             }
         }
     }
