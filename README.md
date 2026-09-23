@@ -75,28 +75,28 @@ Projektissa on proxy-palvelinkonfiguraatio tiedostossa [`vite.config.ts`](./vite
 
 ```mermaid
 flowchart TD
-    subgraph client
-        browser
-    end
+   subgraph client
+      browser
+   end
 
-    subgraph localhost:5173
-        dev --> routingts["routing.ts"]
-        dev --> geocodingts["geocoding.ts"]
+   subgraph localhost:5173
+      dev --> routingts["routing.ts"]
+      dev --> geocodingts["geocoding.ts"]
 
-        dev["React app bundle"]
+      dev["React app bundle"]
 
-        proxy["Vite proxy\nvite.config.ts"]
-    end
+      proxy["Vite proxy\nvite.config.ts"]
+   end
 
-    subgraph api.digitransit.fi
-        geocoding["REST\n/geocoding"]
-        routing["GraphQL\n/routing"]
-    end
+   subgraph api.digitransit.fi
+      geocoding["REST\n/geocoding"]
+      routing["GraphQL\n/routing"]
+   end
 
-    proxy --> |adds API_KEY| geocoding
-    proxy --> |adds API_KEY| routing
-    browser --> |"HTML, JS, CSS"| dev
-    browser --> |"CORS allowed\nNo api key"| proxy
+   proxy --> |adds API_KEY| geocoding
+   proxy --> |adds API_KEY| routing
+   browser --> |"HTML, JS, CSS"| dev
+   browser --> |"CORS allowed\nNo api key"| proxy
 ```
 
 Proxy käsittelee kaksi API-endpointtia:
