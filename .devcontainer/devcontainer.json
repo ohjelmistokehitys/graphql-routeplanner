@@ -1,0 +1,10 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+{
+    "name": "GraphQL routeplanner",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node",
+    "containerEnv": {
+        // see https://donottrack.sh/
+        "DO_NOT_TRACK": "1"
+    }
+}
